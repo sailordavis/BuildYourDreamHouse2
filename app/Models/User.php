@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 // Importación necesaria para utilizar tokens de Sanctum
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'rol_id'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
