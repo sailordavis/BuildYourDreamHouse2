@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Model;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -14,17 +15,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+// Importación necesaria para utilizar tokens de Sanctum
+use Laravel\Sanctum\HasApiTokens;
+
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Conversión de atributos
      */
     protected function casts(): array
     {
@@ -35,32 +37,40 @@ class User extends Authenticatable
     }
 
     /**
-     * Un usuario pertenece a un rol 
+     * Un usuario pertenece a un rol
      */
     public function rol(): BelongsTo
     {
-      return $this->belongsTo(Rol::class);
+        return $this->belongsTo(Rol::class);
     }
 
-    // Un usuario tiene un carrito
+    /**
+     * Un usuario tiene un carrito
+     */
     public function carrito(): HasOne
     {
         return $this->hasOne(Carrito::class, 'usuario_id');
     }
 
-    // Un usuario puede realizar muchas ventas
+    /**
+     * Un usuario puede realizar muchas ventas
+     */
     public function ventas(): HasMany
     {
         return $this->hasMany(Venta::class, 'usuario_id');
     }
 
-    // Un usuario puede tener muchos registros de búsquedas
+    /**
+     * Un usuario puede tener muchos registros de búsquedas
+     */
     public function historialBusquedas(): HasMany
     {
         return $this->hasMany(Historial_Busqueda::class, 'usuario_id');
     }
 
-    // Un usuario puede tener muchos resultados de tests
+    /**
+     * Un usuario puede tener muchos resultados de tests
+     */
     public function resultadosTest(): HasMany
     {
         return $this->hasMany(Resultado::class, 'usuario_id');
