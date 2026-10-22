@@ -1,64 +1,35 @@
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
 
-    <title>Iniciar sesión - Build Your Dream House 2.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- Estilos del módulo Auth -->
-    @vite('resources/css/auth/auth.css')
+    @vite('resources/js/auth/login.js')
 </head>
+<body>
 
-<body class="bg-light">
-
-    <div class="container min-vh-100 d-flex justify-content-center align-items-center">
-
-        <div class="card shadow p-4" style="width: 100%; max-width: 420px;">
-
+    <div class="container mt-5">
+        <div class="card shadow mx-auto" style="max-width: 400px;">
             <div class="card-body">
 
-                <h3 class="text-center mb-3">
-                    Build Your Dream House 2.0
-                </h3>
+                <h3 class="text-center mb-4">Iniciar sesión</h3>
 
-                <h5 class="text-center text-muted mb-4">
-                    Iniciar sesión
-                </h5>
-
-                <!-- Formulario Login -->
                 <form id="loginForm">
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">
-                            Correo electrónico
-                        </label>
-
-                        <input type="email"
-                               class="form-control"
-                               id="email"
-                               name="email"
-                               placeholder="Ingresa tu correo"
-                               required>
+                        <label class="form-label">Correo electrónico</label>
+                        <input type="email" id="email"
+                               class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">
-                            Contraseña
-                        </label>
-
-                        <input type="password"
-                               class="form-control"
-                               id="password"
-                               name="password"
-                               placeholder="Ingresa tu contraseña"
-                               required>
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" id="password"
+                               class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">
@@ -67,23 +38,16 @@
 
                 </form>
 
-                <hr class="my-4">
+                <p id="loginError" class="text-danger mt-3" hidden></p>
 
-                <p class="text-center mb-2">
-                    ¿Todavía no tienes una cuenta?
-                </p>
-
-                <!-- Navegación al registro -->
-                <a href="{{ url('/auth/register') }}"
-                   class="btn btn-outline-secondary w-100">
-                    Crear cuenta
+                <a href="/catalog/menu" class="d-block text-center mt-3">
+                    Regresar al catálogo
                 </a>
 
             </div>
-
         </div>
-
     </div>
 
 </body>
 </html>
+

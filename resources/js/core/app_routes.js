@@ -1,18 +1,23 @@
-
 export const AppRoutes = {
 
     // Direcciones de las interfaces
     routes: {
-        //Modulo de Autenticacion
+
+        // Página principal
+        home: '/catalog/menu',
+
+        // Módulo de Autenticación
         auth: {
             login: '/auth/login',
             register: '/auth/register'
         },
-        //Modulo de Catalogo
+
+        // Módulo de Catálogo
         catalog: {
-            index: '/catalog'
+            menu: '/catalog/menu'
         },
 
+        // Módulo Administrador
         admin: {
             dashboard: '/admin'
         }
@@ -28,24 +33,24 @@ export const AppRoutes = {
 
         // Administrador
         if (Number(role) === 3) {
-            this.navigate(this.routes.admin);
+            this.navigate(this.routes.admin.dashboard);
         }
 
         // Cliente
         else if (Number(role) === 1) {
-            this.navigate(this.routes.catalog);
+            this.navigate(this.routes.catalog.menu);
         }
 
         // Rol desconocido
         else {
             console.warn('Rol de usuario no reconocido');
-            this.navigate(this.routes.login);
+            this.navigate(this.routes.auth.login);
         }
     },
 
     // Regresar al inicio de sesión
     goToLogin() {
-        this.navigate(this.routes.login);
+        this.navigate(this.routes.auth.login);
     }
 
 };

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Página principal del sistema
+Route::redirect('/', '/catalog/menu');
+
 // Módulo Auth
 Route::prefix('auth')->group(function () {
 
@@ -13,7 +16,7 @@ Route::prefix('auth')->group(function () {
 // Módulo Catalog
 Route::prefix('catalog')->group(function () {
 
-    Route::view('/', 'catalog.index');
+    Route::view('/menu', 'catalog.menu');
 
 });
 
