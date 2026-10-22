@@ -8,7 +8,7 @@ export const AppRoutes = {
             login: '/auth/login',
             register: '/auth/register'
         },
-
+        //Modulo de Catalogo
         catalog: {
             index: '/catalog'
         },
