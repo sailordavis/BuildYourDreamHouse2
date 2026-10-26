@@ -11,6 +11,11 @@ auth:{
     login: '/auth/login',
     logout: '/auth/logout',
     me: '/auth/me'
+},
+
+//Modulo Catalogo
+catalog:{
+    showProduct: '/catalog/showProduct'
 }
 
 };

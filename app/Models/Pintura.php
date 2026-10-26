@@ -19,6 +19,11 @@ class Pintura extends Model
         'stock',
         'descripcion',
         'imagen',
+        'acabado',
+        'gama_color',
+        'superficie',
+        'eficiencia',
+        'estilo_decorativo',
     ];
 
     //Un producto puede estar agregado en muchos carritos 

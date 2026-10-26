@@ -11,6 +11,7 @@ export default defineConfig({
             'resources/js/auth/login.js',
 
             // Módulo de catálogo
+            'resources/css/catalog/catalog.css',
             'resources/js/catalog/catalog_menu.js'
 
             ],
