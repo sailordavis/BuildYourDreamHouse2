@@ -1,0 +1,11 @@
+﻿caso,es_exterior,superficie_es_interior,superficie_coincidencia,eficiencia_coincidencia,esperado,prediccion,correcto
+Interior con superficie diferente,0,1,0,1,1,1,True
+Interior con coincidencia de superficie,0,1,1,1,1,1,True
+Interior sin eficiencia requerida,0,1,0,0,0,0,True
+Interior sin eficiencia y con coincidencia,0,1,1,0,0,0,True
+"Interior solicitado, pintura no apta",0,0,-1,0,0,0,True
+"Interior solicitado, pintura no apta y sin coincidencia",0,0,0,0,0,0,True
+Exterior sin dato de coincidencia de superficie,1,0,-1,1,0,0,True
+Exterior sin eficiencia requerida,1,0,-1,0,0,0,True
+Exterior con superficie diferente y sin eficiencia,1,0,0,0,0,0,True
+"Exterior solicitado, pintura no apta",1,1,0,0,0,0,True

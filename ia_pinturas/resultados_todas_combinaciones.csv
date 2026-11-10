@@ -1,0 +1,25 @@
+﻿es_exterior,superficie_es_interior,superficie_coincidencia,eficiencia_coincidencia,esperado,prediccion,correcto,presente_en_entrenamiento,tipo_evaluacion
+0,0,-1,0,0,0,True,False,Combinacion no vista
+0,0,-1,1,0,0,True,True,Combinacion conocida
+0,0,0,0,0,0,True,False,Combinacion no vista
+0,0,0,1,0,0,True,False,Combinacion no vista
+0,0,1,0,0,0,True,False,Combinacion no vista
+0,0,1,1,0,0,True,False,Combinacion no vista
+0,1,-1,0,0,0,True,True,Combinacion conocida
+0,1,-1,1,1,1,True,True,Combinacion conocida
+0,1,0,0,0,0,True,False,Combinacion no vista
+0,1,0,1,1,1,True,False,Combinacion no vista
+0,1,1,0,0,0,True,False,Combinacion no vista
+0,1,1,1,1,1,True,False,Combinacion no vista
+1,0,-1,0,0,0,True,False,Combinacion no vista
+1,0,-1,1,0,0,True,False,Combinacion no vista
+1,0,0,0,0,0,True,False,Combinacion no vista
+1,0,0,1,0,0,True,True,Combinacion conocida
+1,0,1,0,0,0,True,True,Combinacion conocida
+1,0,1,1,1,1,True,True,Combinacion conocida
+1,1,-1,0,0,0,True,False,Combinacion no vista
+1,1,-1,1,0,0,True,False,Combinacion no vista
+1,1,0,0,0,0,True,False,Combinacion no vista
+1,1,0,1,0,0,True,True,Combinacion conocida
+1,1,1,0,0,0,True,False,Combinacion no vista
+1,1,1,1,0,0,True,True,Combinacion conocida

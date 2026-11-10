@@ -1,0 +1,6 @@
+﻿resultado_id,pintura_id,es_exterior,superficie_es_interior,superficie_coincidencia,eficiencia_coincidencia,valor_real,prediccion,correcto
+105,1005,0,1,-1,0,0,0,True
+103,1007,1,0,1,1,1,1,True
+102,1002,0,0,-1,1,0,0,True
+103,1008,1,0,0,1,0,0,True
+106,1006,1,1,1,1,0,0,True
