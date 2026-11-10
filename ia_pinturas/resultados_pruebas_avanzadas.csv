@@ -1,0 +1,26 @@
+﻿caso,categoria,descripcion,es_exterior,superficie_es_interior,superficie_coincidencia,eficiencia_coincidencia,esperado,prediccion,correcto
+1,Normal,Exterior: todas las condiciones coinciden,1,0,1,1,1,1,True
+2,Normal,Interior: eficiencia coincidente,0,1,-1,1,1,1,True
+3,Normal,Interior: eficiencia no coincidente,0,1,-1,0,0,0,True
+4,Normal,Exterior: superficie no coincidente,1,0,0,1,0,0,True
+5,Contradiccion,Pintura interior para exterior con coincidencias positivas,1,1,1,1,0,0,True
+6,Contradiccion,Pintura exterior para interior con eficiencia positiva,0,0,-1,1,0,0,True
+7,Contradiccion,Pintura interior para exterior con coincidencias negativas,1,1,0,0,0,0,True
+8,Limite,"Exterior: superficie coincide, eficiencia no",1,0,1,0,0,0,True
+9,Limite,"Exterior: eficiencia coincide, superficie no",1,0,0,1,0,0,True
+10,Limite,"Interior: superficie coincide, eficiencia no",0,1,1,0,0,0,True
+11,Limite,Exterior: ninguna coincidencia positiva,1,0,0,0,0,0,True
+12,Valor especial,Interior: superficie no evaluada y eficiencia positiva,0,1,-1,1,1,1,True
+13,Valor especial,Interior: superficie no evaluada y eficiencia negativa,0,1,-1,0,0,0,True
+14,Valor especial,Exterior: superficie no evaluada y eficiencia positiva,1,0,-1,1,0,0,True
+15,Valor especial,Exterior: superficie no evaluada y eficiencia negativa,1,0,-1,0,0,0,True
+16,Inusual,Interior: superficie positiva aunque no deberia evaluarse,0,1,1,1,1,1,True
+17,Inusual,Interior: superficie negativa aunque no deberia evaluarse,0,1,0,1,1,1,True
+18,Inusual,"Exterior: ambas coincidencias negativas, pintura apta",1,0,0,0,0,0,True
+19,Inusual,Interior: todas las coincidencias favorables pero pintura exterior,0,0,1,1,0,0,True
+20,Inusual,Exterior: coincidencias positivas pero pintura interior,1,1,1,1,0,0,True
+21,Invariancia,"Interior: superficie -1, eficiencia positiva",0,1,-1,1,1,1,True
+22,Invariancia,"Interior: superficie 0, eficiencia positiva",0,1,0,1,1,1,True
+23,Invariancia,"Interior: superficie 1, eficiencia positiva",0,1,1,1,1,1,True
+24,Poco representado,Exterior: superficie positiva y eficiencia no evaluada,1,0,1,-1,0,0,True
+25,Poco representado,Interior: pintura apta y ambas coincidencias negativas,0,1,0,0,0,0,True
