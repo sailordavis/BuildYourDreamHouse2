@@ -79,11 +79,7 @@ let paginasAVON = [];
 let pinturasClasificadas = [];
 
 
-/*
-|--------------------------------------------------------------------------
-| Cargar el JSON de clasificaciones
-|--------------------------------------------------------------------------
-*/
+//Funcion para cargar el json que clasificara las pinturas 
 
 async function cargarClasificaciones() {
 
@@ -139,34 +135,36 @@ function mostrarCatalogo() {
 
     const contenedor = document.getElementById('Opciones');
 
+    // Limpiar las opciones anteriores
     contenedor.innerHTML = '';
 
     pinturasClasificadas.forEach((modulo) => {
 
+        // Contenedor del dropdown
         const dropdown = document.createElement('div');
-
         dropdown.className = 'dropdown mt-3';
 
+        // Botón principal de la clasificación
         const boton = document.createElement('button');
-
         boton.className = 'btn btn-secondary dropdown-toggle';
         boton.type = 'button';
         boton.setAttribute('data-bs-toggle', 'dropdown');
         boton.textContent = modulo.clasificacion;
 
+        // Lista de subcategorías
         const lista = document.createElement('ul');
-
         lista.className = 'dropdown-menu';
 
         modulo.submodulos.forEach((submodulo) => {
 
             const item = document.createElement('li');
-            const opcion = document.createElement('button');
 
+            const opcion = document.createElement('button');
             opcion.className = 'dropdown-item';
             opcion.type = 'button';
             opcion.textContent = submodulo.Nombre;
 
+            // Mostrar las pinturas de la categoría seleccionada
             opcion.addEventListener('click', () => {
 
                 mostrarPinturas(
@@ -176,12 +174,14 @@ function mostrarCatalogo() {
 
                 // Cerrar el Offcanvas al seleccionar una categoría
                 const offcanvasElement =
-                    document.getElementById('offcanvasCategorias');
+                    document.getElementById('offcanvasExample');
 
-                const instancia =
-                    bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasElement) {
+                    const instancia =
+                        bootstrap.Offcanvas.getInstance(offcanvasElement);
 
-                instancia?.hide();
+                    instancia?.hide();
+                }
 
             });
 
@@ -190,12 +190,14 @@ function mostrarCatalogo() {
 
         });
 
+        // Mantener la estructura original del dropdown
         dropdown.appendChild(boton);
         dropdown.appendChild(lista);
 
         contenedor.appendChild(dropdown);
 
     });
+
 }
 
 
@@ -207,92 +209,58 @@ function mostrarCatalogo() {
 
 function mostrarPinturas(pinturas, titulo) {
 
-    const contenedor = document.getElementById('Pinturas');
+    let interfaz = `
+   <h1 style ="margin-left: 120px;">${titulo}</h1>
+     <div class="container mt-4">
+    <div class="row g-4">`;
+    pinturas.forEach(element => {
 
-    contenedor.innerHTML = '';
-
-    const encabezado = document.createElement('h2');
-
-    encabezado.className = 'mb-4';
-    encabezado.textContent = titulo;
-
-    contenedor.appendChild(encabezado);
-
-    if (pinturas.length === 0) {
-
-        const mensaje = document.createElement('p');
-
-        mensaje.className = 'text-muted';
-        mensaje.textContent =
-            'No hay pinturas disponibles para esta categoría.';
-
-        contenedor.appendChild(mensaje);
-
-        return;
-    }
-
-    const container = document.createElement('div');
-    container.className = 'container';
-
-    const row = document.createElement('div');
-    row.className = 'row g-4';
-
-    pinturas.forEach((pintura) => {
-
-        const columna = document.createElement('div');
-        columna.className = 'col-12 col-sm-6 col-lg-3';
-
-        // La imagen se encuentra dentro de public/imagenesPintura
-        const imagen = '/' + pintura.imagen.replace(/^\/+/, '');
-
-        columna.innerHTML = `
-            <div class="card h-100 shadow-sm">
-
-                <img
-                    src="${imagen}"
-                    class="card-img-top"
-                    alt="Pintura"
-                    style="height:220px; object-fit:contain;"
-                >
-
+       // La imagen se encuentra dentro de public/imagenesPintura
+     const imagen = '/' + element.imagen.replace(/^\/+/, '');
+       interfaz += ` 
+         <div class="col-md-3">
+            <div class="card h-100 shadow" data-stock="${element.stock}" data-id="${element.id}">
+                <img src="${imagen}" class="card-img-top" alt="Pintura Recomendada">
                 <div class="card-body">
+                    <h5 class="card-title">${element.nombre}</h5>
+                    <p class="card-text">Color: ${element.color}</p>
+                    <p class="card-text">Limite de Compra: ${element.stock}</p>
+                    <p class="card-text">${element.descripcion}</p>
+                    <p class="card-text">$ ${element.precio}</p>
+                    <!-- CONTADOR + BOTON -->
+                    <div class="d-flex align-items-center gap-3 mt-3">
 
-                    <h5 class="card-title"></h5>
+                        <!-- Contador -->
+                        <div class="d-flex border rounded overflow-hidden" style="width: 130px;">
+                            <button class="btn py-2 flex-fill btn-menos"
+                                    style="border:none; color:#ff7a00; font-size:20px;">−</button>
 
-                    <p class="card-text color"></p>
+                            <div class="cantidad d-flex justify-content-center align-items-center"
+                                 style="width:50px; font-size:18px; font-weight:600;">
+                                1
+                            </div>
 
-                    <p class="card-text stock"></p>
+                            <button class="btn py-2 flex-fill btn-mas"
+                                    style="border:none; color:#ff7a00; font-size:20px;">+</button>
+                        </div>
 
-                    <p class="card-text descripcion"></p>
+                        <!-- Botón Agregar -->
+                        <button class="btn btn-agregar"
+                                style="border: 2px solid #c40000; color:#c40000; padding:8px 20px; border-radius:8px;"
+                                onclick = "AgregarAlCarrito(${element.id},this)">
+                            Agregar
+                        </button>
 
-                    <p class="card-text precio fw-bold"></p>
+                    </div>
 
                 </div>
-
             </div>
-        `;
-
-        columna.querySelector('.card-title').textContent =
-            pintura.nombre;
-
-        columna.querySelector('.color').textContent =
-            'Color: ' + pintura.color;
-
-        columna.querySelector('.stock').textContent =
-            'Límite de compra: ' + pintura.stock;
-
-        columna.querySelector('.descripcion').textContent =
-            pintura.descripcion ?? '';
-
-        columna.querySelector('.precio').textContent =
-            '$ ' + pintura.precio;
-
-        row.appendChild(columna);
-
-    });
-
-    container.appendChild(row);
-    contenedor.appendChild(container);
+        </div>
+       `;
+});
+    interfaz += `   </div>
+                  </div>`;
+      $("#Pinturas").html(interfaz);
 }
 
 

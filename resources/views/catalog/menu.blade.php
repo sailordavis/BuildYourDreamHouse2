@@ -8,22 +8,41 @@
     <title>Build Your Dream House 2.0</title>
 
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
     <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
 
+    
+    <!-- CSS y JavaScript específicos del catálogo -->
+     @vite([
+    'resources/css/catalog/catalog.css',
+    'resources/js/catalog/catalog_menu.js'
+     ])
+
+     
+
+    <!-- jQuery para las funciones existentes del catálogo -->
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"
+    ></script>
+
+    <!-- Conserva el comportamiento de los elementos ocultos -->
     <style>
         [hidden] {
             display: none !important;
         }
     </style>
-    <!-- CSS con Vite -->
-    @vite('resources/css/catalog/catalog.css'),
-    <!-- JavaScript con Vite -->
-    @vite('resources/js/catalog/catalog_menu.js')
-
 </head>
+
 <body>
 
     <!-- Barra de navegación -->
@@ -36,7 +55,6 @@
 
             <!-- Opciones de visitante -->
             <div id="guestMenu" class="d-flex gap-2" hidden>
-
                 <a href="/auth/login" class="btn btn-outline-primary">
                     Iniciar sesión
                 </a>
@@ -44,115 +62,100 @@
                 <a href="/auth/register" class="btn btn-primary">
                     Registrarse
                 </a>
-
             </div>
 
             <!-- Opciones de cliente -->
             <div id="clientMenu" class="d-flex gap-2" hidden>
-
                 <a href="/cart" class="btn btn-outline-success">
                     Mi carrito
                 </a>
 
-                <button id="logoutBtn" class="btn btn-danger">
+                <button id="logoutBtn" type="button" class="btn btn-danger">
                     Cerrar sesión
                 </button>
-
             </div>
 
         </div>
     </nav>
 
-
     <!-- Catálogo de pinturas -->
-    <main class="container mt-5">
+    <main class="container-fluid">
 
-        <div class="text-center">
+        <section class="text-center mt-3" aria-labelledby="catalogTitle">
 
-            <h1 class="d-flex justify-content-center align-items-center gap-3">
+            <h1
+                id="catalogTitle"
+                class="d-flex justify-content-center align-items-center gap-3"
+            >
+                <i class="bi bi-paint-bucket" aria-hidden="true"></i>
 
-                <i class="bi bi-paint-bucket"></i>
+                <span>Catalogo de Pinturas</span>
 
-                Catálogo de Pinturas
-
-                <i class="bi bi-paint-bucket"
-                   style="transform: scaleX(-1);"></i>
-
+                <i
+                    class="bi bi-paint-bucket"
+                    style="transform: scaleX(-1);"
+                    aria-hidden="true"
+                ></i>
             </h1>
 
-            <p class="mt-3">
-                Encuentra la pintura ideal para tu hogar.
-            </p>
-
-            <!-- Botón de clasificación -->
-            <button class="btn btn-primary mt-2"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasCategorias">
-
+            <a
+                class="btn btn-primary"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+            >
                 Encuentra tus pinturas ideales
+            </a>
 
-            </button>
+        </section>
 
+        <!-- Panel lateral de categorías -->
+        <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+        >
+            <div class="offcanvas-header">
+                <h2 class="offcanvas-title fs-5" id="offcanvasExampleLabel">
+                    Categorias
+                </h2>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Cerrar"
+                ></button>
+            </div>
+
+            <div class="offcanvas-body">
+
+                <p style="margin-top: -22px;">
+                    Encuentra todo tipo de pinturas; desde pinturas para
+                    todo tipo de superficie hasta pinturas para cualquier
+                    estilo decorativo.
+                </p>
+
+                <!-- Las opciones se generan con JavaScript -->
+                <div id="Opciones"></div>
+
+            </div>
         </div>
 
-        <!-- Contenedor de pinturas -->
-        <div id="Pinturas" class="mt-5">
-
-            <!-- Aquí JavaScript mostrará las pinturas -->
-
-        </div>
+        <!-- Aquí se muestra el catálogo dinámico -->
+        <section id="Pinturas" aria-label="Pinturas disponibles"></section>
 
     </main>
 
-
-    <!-- Offcanvas de categorías -->
-    <div class="offcanvas offcanvas-start"
-         tabindex="-1"
-         id="offcanvasCategorias"
-         aria-labelledby="offcanvasCategoriasLabel">
-
-        <div class="offcanvas-header">
-
-            <h5 class="offcanvas-title"
-                id="offcanvasCategoriasLabel">
-
-                Categorías
-
-            </h5>
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Cerrar">
-            </button>
-
-        </div>
-
-        <div class="offcanvas-body">
-
-            <p>
-                Encuentra todo tipo de pinturas,
-                desde pinturas para diferentes superficies
-                hasta pinturas para cualquier estilo decorativo.
-            </p>
-
-            <!-- Contenedor de categorías y submódulos -->
-            <div id="Opciones">
-
-                <!-- Aquí JavaScript generará las categorías -->
-
-            </div>
-
-        </div>
-
-    </div>
-
-
     <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
 
 </body>
 </html>
+
 
 
