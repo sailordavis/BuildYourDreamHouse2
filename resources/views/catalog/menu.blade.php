@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,13 +65,22 @@
             </div>
 
             <!-- Opciones de cliente -->
-            <div id="clientMenu" class="d-flex gap-2" hidden>
-                <a href="/cart" class="btn btn-outline-success">
-                    Mi carrito
+            <div id="clientMenu" class="d-flex gap-2" hidden> 
+            <!-- Contestar test -->
+              <a href="/test/questionario"
+             class="btn btn-outline-primary"
+              id="BotonTest"
+               title="Contestar test">
+                <i class="bi bi-ui-checks"></i>
+                 <span>Contestar test</span>
+                 </a>
+            <!-- Carrito de compra -->
+                <a href="/cart" class="btn btn-outline-success" id ="BotonCarrito">
+                   <i class="bi bi-cart-dash-fill"></i>
                 </a>
-
+                <!-- Cerrar sesion  -->
                 <button id="logoutBtn" type="button" class="btn btn-danger">
-                    Cerrar sesión
+                    <i class="bi bi-box-arrow-right"></i>
                 </button>
             </div>
 

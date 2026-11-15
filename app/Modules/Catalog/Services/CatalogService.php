@@ -7,11 +7,7 @@ use Illuminate\Support\Str;
 
 class CatalogService
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Función principal para clasificar las pinturas
-    |--------------------------------------------------------------------------
-    */
+    //Funcion principal para clasificar pinturas
 
     public function showProduct(array $datos)
     {

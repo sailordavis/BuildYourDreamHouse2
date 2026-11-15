@@ -16,6 +16,11 @@ auth:{
 //Modulo Catalogo
 catalog:{
     showProduct: '/catalog/showProduct'
+},
+
+//Modulo Test
+test:{
+    procesarRespuestas: '/test/procesarRespuestas'
 }
 
 };

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Página principal del sistema
 Route::redirect('/', '/catalog/menu');
 
-// Módulo Auth
+// Modulo Auth
 Route::prefix('auth')->group(function () {
 
     Route::view('/login', 'auth.login');
@@ -13,11 +13,16 @@ Route::prefix('auth')->group(function () {
 
 });
 
-// Módulo Catalog
+// Modulo Catalog
 Route::prefix('catalog')->group(function () {
 
     Route::view('/menu', 'catalog.menu');
 
+});
+
+//Modulo Test
+Route::prefix('test')->group(function () {
+    Route::view('/questionario', 'test.questionario');
 });
 
 // Módulo Admin

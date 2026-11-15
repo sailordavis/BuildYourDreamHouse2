@@ -17,8 +17,13 @@ export const AppRoutes = {
             menu: '/catalog/menu'
         },
 
+        //Modulo Test
+        test:{
+            questionario: '/test/questionario'
+        },
+
         // Módulo Administrador
-        admin: {
+        admin:{
             dashboard: '/admin'
         }
     },
