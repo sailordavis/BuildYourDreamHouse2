@@ -222,8 +222,7 @@ async function mostrarResultados() {
         }
 
         // Mostrar los datos recibidos del servicio
-        console.log('Correspondencias:', datosGuia.datos_clave);
-        console.log('Pinturas:', datosGuia.pinturas);
+        console.log('VariablesEntrada:', datosGuia);
 
         // Todavía no se generan recomendaciones.
         // Aquí podrás conectar posteriormente la interfaz de resultados.
