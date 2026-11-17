@@ -7,9 +7,16 @@ use Illuminate\Support\Str;
 use App\Models\Resultado;
 use App\Models\Respuesta;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Test\Services\ServicioIA;
 
 class TestService
 {
+
+     public function __construct(private ServicioIA $servicioIA)
+      {
+        $this->servicioIA = $servicioIA;
+      }
+
     
     /**
      * Procesa las respuestas del test.
@@ -17,52 +24,60 @@ class TestService
      * Obtiene las correspondencias asociadas a cada respuesta
      * y consulta las pinturas registradas en la base de datos.
      */
-    public function procesarRespuestas(array $respuestas): array
-{
-    return DB::transaction(function () use ($respuestas) {
+    public function procesarRespuestas(
+    array $respuestas
+): array {
+    // 1. Preparar y guardar los datos en la base de datos.
+    $datosEntrada = DB::transaction(function () use ($respuestas) {
 
-        // 1. Crear el resultado asociado al usuario autenticado
         $resultado = Resultado::create([
             'usuario_id' => Auth::id(),
         ]);
 
         $datosClave = [];
 
-        // 2. Guardar cada respuesta y obtener sus correspondencias
         foreach ($respuestas as $respuesta) {
-
-            // Registrar la respuesta asociada al resultado creado
             Respuesta::create([
                 'resultado_id' => $resultado->id,
                 'num_pregunta' => $respuesta['id'],
                 'opcion_value' => $respuesta['opcion'],
             ]);
 
-            // Consultar las correspondencias de la respuesta
             $correspondencias = $this->obtenerTablaCorrespondencias(
                 $respuesta['id'],
                 $respuesta['opcion']
             );
 
-            // Acumular las correspondencias encontradas
             $datosClave = array_merge(
                 $datosClave,
                 $correspondencias
             );
         }
 
-        // 3. Obtener las pinturas disponibles
         $pinturas = $this->obtenerPinturas();
 
-        
-
-        //4. Crear el vector donde almacenara las coincidencias idenficadas
-        //junto a otros parametros que formaran parte de  las variables de entrada que 
-        //recibira el modelo 
-        $datosEntrada = $this->prepararDatosEntrada($resultado->id,$datosClave,$pinturas);
-
-        return $datosEntrada;
+        return $this->prepararDatosEntrada(
+            $resultado->id,
+            $datosClave,
+            $pinturas
+        );
     });
+
+    // 2. Consultar el modelo para cada pintura.
+    $recomendaciones = [];
+
+    foreach ($datosEntrada as $dato) {
+        $prediccion = $servicioIA->predecirPintura($dato);
+
+        // Conservar los datos originales e incorporar la predicción.
+        $recomendaciones[] = array_merge(
+            $dato,
+            $prediccion
+        );
+    }
+
+    // 3. Devolver las pinturas con su clasificación.
+    return $recomendaciones;
 }
 
     /**
@@ -75,8 +90,7 @@ class TestService
         return DB::table('correspondencias')
             ->select(
                 'atributo_objetivo',
-                'valor_relacionado',
-                'peso'
+                'valor_relacionado'
             )
             ->where('pregunta_id', $preguntaId)
             ->where('opcion_value', $opcionValue)

@@ -25,12 +25,12 @@ class TestController extends Controller
         ]);
 
         // Delegar el procesamiento al servicio
-        $coincidencias = $this->testService->procesarRespuestas(
+        $recomendaciones = $this->testService->procesarRespuestas(
             $datosValidados['datos']
         );
 
         // Devolver las coincidencias en formato JSON
-        return response()->json($coincidencias, 200);
+        return response()->json($recomendaciones, 200);
     }
 
 }

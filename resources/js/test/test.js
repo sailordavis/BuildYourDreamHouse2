@@ -211,8 +211,6 @@ async function mostrarResultados() {
         );
       
         datosGuia = respuesta;
-
-        // Cerrar el modal de finalización
         const modalElemento = document.getElementById('aviso_final');
 
         if (modalElemento && window.bootstrap?.Modal) {
