@@ -11,8 +11,9 @@ use App\Modules\Test\Services\ServicioIA;
 
 class TestService
 {
+     protected ServicioIA $servicioIA;
 
-     public function __construct(private ServicioIA $servicioIA)
+     public function __construct(ServicioIA $servicioIA)
       {
         $this->servicioIA = $servicioIA;
       }
@@ -67,7 +68,7 @@ class TestService
     $recomendaciones = [];
 
     foreach ($datosEntrada as $dato) {
-        $prediccion = $servicioIA->predecirPintura($dato);
+        $prediccion = $this->servicioIA->predecirPintura($dato);
 
         // Conservar los datos originales e incorporar la predicción.
         $recomendaciones[] = array_merge(
